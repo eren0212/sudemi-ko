@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevgiline Sor!</title>
+    <style>
+        /* Genel stil */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            animation: backgroundColorChange 20s infinite alternate;
+        }
+
+        /* Renk değişim animasyonu */
+        @keyframes backgroundColorChange {
+            0% {
+                background: linear-gradient(135deg, #ff99cc, #ffccff);
+            }
+            25% {
+                background: linear-gradient(135deg, #f7a8d9, #ffc3a0);
+            }
+            50% {
+                background: linear-gradient(135deg, #d5a7f6, #ffb6c1);
+            }
+            75% {
+                background: linear-gradient(135deg, #c0e0e0, #ffe0a9);
+            }
+            100% {
+                background: linear-gradient(135deg, #ff99cc, #ffccff);
+            }
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 1px 1px 4px #0003;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* Mektup şeklinde soru kutusu */
+        .letter {
+            position: relative;
+            width: 320px;
+            height: 250px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            transform: rotate(0deg);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-out;
+            border: 5px solid #e76c6c;
+        }
+
+        .letter p {
+            font-size: 20px;
+            color: #555;
+            margin: 0;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        button {
+            background: #ff6699;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #e05588;
+            transform: scale(1.1);
+        }
+
+        /* Kelebek animasyonu */
+        @keyframes fly {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-30px) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Kelebeklerin stilini çoğaltmak */
+        .butterfly {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            animation: fly 10s infinite ease-in-out;
+        }
+
+        .butterfly img {
+            width: 50px;
+            height: auto;
+            transform-origin: center;
+        }
+
+        .butterfly:nth-child(2) {
+            top: 40%;
+            left: 50%;
+            animation-duration: 12s;
+        }
+
+        .butterfly:nth-child(3) {
+            top: 60%;
+            left: 80%;
+            animation-duration: 14s;
+        }
+
+        .butterfly:nth-child(4) {
+            top: 30%;
+            left: 70%;
+            animation-duration: 18s;
+        }
+
+        /* Çiçek animasyonu */
+        @keyframes flowerAnimation {
+            0% {
+                transform: scale(1);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Çiçeklerin stilini çoğaltmak */
+        .flower {
+            position: absolute;
+            top: 10%;
+            left: 30%;
+            animation: flowerAnimation 8s infinite ease-in-out;
+        }
+
+        .flower img {
+            width: 40px;
+            height: auto;
+            transform-origin: center;
+        }
+
+        .flower:nth-child(2) {
+            top: 20%;
+            left: 60%;
+            animation-duration: 10s;
+        }
+
+        .flower:nth-child(3) {
+            top: 50%;
+            left: 80%;
+            animation-duration: 12s;
+        }
+
+        .flower:nth-child(4) {
+            top: 70%;
+            left: 20%;
+            animation-duration: 14s;
+        }
+
+        /* Son mesajın stilini ayarlama */
+        .end-message {
+            font-size: 22px;
+            color: #e76c6c;
+            font-weight: bold;
+            margin-top: 30px;
+            display: none;
+        }
+
+        /* Şiir stil */
+        .poem {
+            font-size: 22px;
+            color: #e76c6c;
+            font-weight: bold;
+            margin-top: 30px;
+            display: none;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<h1>💖 Sevgiline Sor 💖</h1>
+<!-- Mektup şeklinde soru kutusu -->
+<div class="letter">
+    <p id="question" class="question-change">Butona basarak soru getir!</p>
+</div>
+
+<button id="newQuestionBtn" onclick="newQuestion()">Yeni Soru</button>
+<p id="endMessage" class="end-message">Sorularımız bu kadardı! 💖</p>
+
+<!-- Kelebek Animasyonu (Çoğaltılmış Kelebekler) -->
+<div class="butterfly">
+    <img src="https://img.icons8.com/ios/452/butterfly.png" alt="butterfly">
+</div>
+<div class="butterfly">
+    <img src="https://img.icons8.com/ios/452/butterfly.png" alt="butterfly">
+</div>
+<div class="butterfly">
+    <img src="https://img.icons8.com/ios/452/butterfly.png" alt="butterfly">
+</div>
+<div class="butterfly">
+    <img src="https://img.icons8.com/ios/452/butterfly.png" alt="butterfly">
+</div>
+
+<!-- Çiçek Animasyonu (Çoğaltılmış Çiçekler) -->
+<div class="flower">
+    <img src="https://img.icons8.com/ios/452/flower.png" alt="flower">
+</div>
+<div class="flower">
+    <img src="https://img.icons8.com/ios/452/flower.png" alt="flower">
+</div>
+<div class="flower">
+    <img src="https://img.icons8.com/ios/452/flower.png" alt="flower">
+</div>
+<div class="flower">
+    <img src="https://img.icons8.com/ios/452/flower.png" alt="flower">
+</div>
+
+<!-- Şiir -->
+<div class="poem" id="poem">
+    💖 **Birlikte geçirdiğimiz her an,**<br>
+    **Kalbimde iz bırakan bir hatıra.**<br>
+    **Beni her düşündüğünde,**<br>
+    **Bir yıldız kayarsa, senin için.**<br>
+    💖
+</div>
+
+<script>
+    const questions = [
+        "Beni ilk gördüğünde ne hissettin?",
+        "Beni en çok ne zaman özledin?",
+        "Birlikte yapmayı en çok istediğin şey nedir?",
+        "Benden aldığın en güzel hediye neydi?",
+        "Beraber gitmek istediğin hayalindeki yer neresi?",
+        "İlk buluşmamızı nasıl hatırlıyorsun?",
+        "Bende en çok sevdiğin huyum nedir?",
+        "Birlikte izleyelim dediğin film hangisi?",
+        "En mutlu olduğun an hangisiydi?",
+        "Beni üç kelime ile nasıl tarif edersin?"
+    ];
+
+    let questionCount = 0; // Soruların sayısını takip etmek için değişken
+
+    function newQuestion() {
+        if (questionCount < questions.length) {
+            const random = Math.floor(Math.random() * questions.length);
+            const questionText = document.getElementById("question");
+
+            // Sorunun animasyonunu ekle
+            questionText.classList.remove("question-change");
+            void questionText.offsetWidth; // Animasyonu sıfırla
+            questionText.classList.add("question-change");
+
+            // Soruyu ekrana yazdır
+            questionText.innerText = questions[random];
+            questionCount++;
+
+        } else {
+            // Sorular bittiğinde şiir ve mesajı göster
+            document.getElementById("endMessage").style.display = "block";
+            document.getElementById("poem").style.display = "block";
+            document.getElementById("newQuestionBtn").disabled = true; // Butonu devre dışı bırak
+        }
+    }
+</script>
+
+</body>
+</html>
